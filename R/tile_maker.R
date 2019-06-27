@@ -57,7 +57,7 @@ ico <- function(x, chevron = FALSE) {
 #'     div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
 #'   )
 #' )
-#' 
+#'
 #' ## Or taking advantage of the ability to change the textModifier:
 #' finisher(
 #'   title = "h4 modifier",
@@ -315,7 +315,7 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #'   txt = Species
 #' ))
 #' @export tile_matrix
-tile_matrix <- function(data, values, txt, icon, former, target = 100,
+tile_matrix <- function(data, values, txt, icon, former, target,
                         thresholdHigh = 90, thresholdLow = 50, cols = 4,
                         title = NULL, roundVal = 1, textModifier = "h1") {
 
@@ -345,7 +345,10 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
     icon <- pull(data, !!i),
     icon <- rep(NA, nrow(data))
   )
-
+  ifelse(!missing(target),
+         target <- pull(data, !!f),
+         target <- rep(NA, nrow(data))
+  )
   ## Errors
   if (class(values) != "numeric" & class(values) != "integer") {
     stop(
@@ -358,7 +361,7 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
   values <- round(values, roundVal)
 
   ## Remake df and start adding extra stuffs
-  df <- data_frame(txt, values, former, icon)
+  df <- data_frame(txt, values, former, icon, target)
 
   df$id <- 1:nrow(df)
   df$butts <- list("")
@@ -370,10 +373,13 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
     df$values[is.na(df$values)] <- 0.001
     warning("Converted NAs in values to 0.001")
   }
-  # browser()
+  ## protect against NAs
+  if (any(is.na(df$target))) {
+    df$target[is.na(df$target)] <- 0.001
+    warning("Converted NAs in values to 0.001")
+  }
   ## Need to protect against some NAs, but not if all of them are
   if (any(is.na(former)) & !all(is.na(former))) {
-    # browser()
     df$former[is.na(df$former)] <- 0.001
     warning("Converted NAs in former to 0.001")
   }
@@ -383,13 +389,13 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
     if (any(!is.na(former))) {
       df$butts[[i]] <- solo_gradient_box(
         value = df$values[i], txt = df$txt[i],
-        size = 2, target = target, thresholdHigh = thresholdHigh,
+        size = 2, target = df$target[i], thresholdHigh = thresholdHigh,
         thresholdLow = thresholdLow, former = df$former[i]
       )
     } else {
       df$butts[[i]] <- solo_gradient_box(
         value = df$values[i], txt = df$txt[i],
-        size = 2, target = target, thresholdHigh = thresholdHigh,
+        size = 2, target = df$target[i], thresholdHigh = thresholdHigh,
         thresholdLow = thresholdLow
       )
     }

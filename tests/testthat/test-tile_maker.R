@@ -150,6 +150,13 @@ test_that("protections work", {
     )
   )
 
+  expect_warning(
+    tile_matrix(
+      data = data.frame(v = c(1, 1, 1), f = c(1, 1, NA), t = c(2, 5, 10)),
+      values = v, former = f, target = t
+    )
+  )
+
   # tile_matrix(data = data.frame(v = c(1,1,1), f = c(1,1,NA)),
   #             values = v, former = f) %>%
   #   unlist() %>% grepl(pattern = "99900%", x = .) %>% sum %>%
