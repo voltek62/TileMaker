@@ -327,6 +327,7 @@ tile_matrix <- function(data, values, txt, icon, former, target,
   t <- enquo(txt)
   f <- enquo(former)
   i <- enquo(icon)
+  t <- enquo(target)
 
   ## Now push them back into original names
   ifelse(!missing(values),
@@ -346,7 +347,7 @@ tile_matrix <- function(data, values, txt, icon, former, target,
     icon <- rep(NA, nrow(data))
   )
   ifelse(!missing(target),
-         target <- pull(data, !!f),
+         target <- pull(data, !!t),
          target <- rep(NA, nrow(data))
   )
   ## Errors

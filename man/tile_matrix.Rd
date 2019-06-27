@@ -4,9 +4,9 @@
 \alias{tile_matrix}
 \title{tileMatrix}
 \usage{
-tile_matrix(data, values, txt, icon, former, target = 100,
-  thresholdHigh = 90, thresholdLow = 50, cols = 4, title = NULL,
-  roundVal = 1, textModifier = "h1")
+tile_matrix(data, values, txt, icon, former, target, thresholdHigh = 90,
+  thresholdLow = 50, cols = 4, title = NULL, roundVal = 1,
+  textModifier = "h1")
 }
 \arguments{
 \item{data}{a dataframe containing the data you would like to plot}
