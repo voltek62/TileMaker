@@ -293,7 +293,7 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 #' the name of thing you want, like "check"... not the full "gyphicon-check"
 #' @param former optional vector containing former values (to show change from last), contained in the datframe `data`
-#' @param target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
+#' @param target Optional vector containing target that the value should be compared against. Use with ThresholdHigh and THresholdLow
 #' @param thresholdHigh Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
 #' represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
 #' and if not, as orange. Use w/ target and ThresholdLow.

@@ -20,7 +20,7 @@ the name of thing you want, like "check"... not the full "gyphicon-check"}
 
 \item{former}{optional vector containing former values (to show change from last), contained in the datframe `data`}
 
-\item{target}{Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow}
+\item{target}{Optional vector containing target that the value should be compared against. Use with ThresholdHigh and THresholdLow}
 
 \item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
 represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
